@@ -1,0 +1,8 @@
+Package: cdi.itracer
+Name: itracer
+Depends: mobilesubstrate, preferenceloader, applist
+Version: 0.0.1
+Architecture: iphoneos-arm
+Maintainer: jx6f
+Author: jx6f
+Section: Tweaks

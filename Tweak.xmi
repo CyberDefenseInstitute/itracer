@@ -1,0 +1,32 @@
+
+extern "C" void HookObjcFunctions( const char *appName );
+
+static NSString *preferenceFilePath = @"/private/var/mobile/Library/Preferences/cdi.itracer.plist";
+
+// Tweak starts here
+%ctor {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    // Only hook Apps the user has selected in itracer's settings panel
+    NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
+
+    // Load itracer preferences
+    NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:preferenceFilePath];
+    id shouldHook = [preferences objectForKey:appId];
+    if ( (shouldHook == nil) || (! [shouldHook boolValue]) ) {
+        NSLog(@"itracer - Profiling disabled for %@", appId);
+    	[preferences release];
+        [pool drain];
+	    return;
+    }
+
+	// Initialize DB storage
+    NSLog(@"itracer - Profiling enabled for %@", appId);
+    
+    HookObjcFunctions( [ appId UTF8String ] );
+    
+    [preferences release];
+    [pool drain];
+}
+
+/* vim: set filetype=objc : */

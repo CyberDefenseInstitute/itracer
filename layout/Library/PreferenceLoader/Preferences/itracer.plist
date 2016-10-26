@@ -1,0 +1,27 @@
+entry = {
+  bundle = AppList;
+  cell = PSLinkCell;
+  icon = "/Library/PreferenceLoader/Preferences/itracer.png";
+  isController = 1;
+  label = "itracer";
+  ALSettingsPath = "/var/mobile/Library/Preferences/cdi.itracer.plist";
+  ALSettingsKeyPrefix = "";
+  ALChangeNotification = "cdi.itracer";
+  ALAllowsSelection = 1;
+  ALSectionDescriptors = (
+    {
+      title = "User Applications";
+      predicate = "isSystemApplication = FALSE";
+      "cell-class-name" = "ALSwitchCell";
+      "icon-size" = 30;
+      "suppress-hidden-apps" = 1;
+    },
+    {
+      title = "System Applications";
+      predicate = "isSystemApplication = TRUE";
+      "cell-class-name" = "ALSwitchCell";
+      "icon-size" = 30;
+      "suppress-hidden-apps" = 1;
+    }
+  );
+};
